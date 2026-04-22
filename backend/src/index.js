@@ -12,7 +12,7 @@ const port = process.env.PORT || 8000;
 
 app.use(
   cors({
-    origin: "flight-booking-portal-6ytdfyvr6-asim-nisars-projects.vercel.app",
+    origin: "https://flight-booking-portal.vercel.app/",
     credentials: true,
   }),
 );
