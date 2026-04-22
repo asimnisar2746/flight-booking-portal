@@ -12,7 +12,7 @@ const port = process.env.PORT || 8000;
 
 app.use(
   cors({
-    origin: "https://flight-booking-portal.vercel.app/",
+    origin: "https://flight-booking-portal.vercel.app",
     credentials: true,
   }),
 );
