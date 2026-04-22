@@ -10,7 +10,12 @@ dotenv.config({
 const app = express();
 const port = process.env.PORT || 8000;
 
-app.use(cors());
+app.use(
+  cors({
+    origin: "flight-booking-portal-6ytdfyvr6-asim-nisars-projects.vercel.app",
+    credentials: true,
+  }),
+);
 app.use(express.json());
 
 import authRoutes from "../src/routes/auth.routes.js";
