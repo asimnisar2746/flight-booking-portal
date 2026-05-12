@@ -2,6 +2,7 @@ import dotenv from "dotenv";
 import express from "express";
 import cors from "cors";
 import connectDB from "./db/index.js";
+import cookieParser from "cookie-parser";
 
 dotenv.config({
   path: "./.env",
@@ -17,6 +18,7 @@ app.use(
   }),
 );
 app.use(express.json());
+app.use(cookieParser());
 
 import authRoutes from "../src/routes/auth.routes.js";
 app.use("/api/auth", authRoutes);

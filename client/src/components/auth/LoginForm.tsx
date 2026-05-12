@@ -24,7 +24,8 @@ function LoginForm() {
         email: formData.email.trim(),
         password: formData.password.trim(),
       });
-      localStorage.setItem("token", res.token);
+      localStorage.setItem("accessToken", res.accessToken);
+      localStorage.setItem("refreshToken", res.refreshToken);
 
       toast.success(res.message, { id: toastId });
       navigate("/dashboard");

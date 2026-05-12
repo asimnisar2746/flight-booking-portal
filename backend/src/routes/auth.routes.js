@@ -8,17 +8,17 @@ import {
   getME,
   loginUser,
   registerUser,
+  logoutUser,
+  refreshAccessToken,
 } from "../controllers/auth.controller.js";
 import authMiddleware from "../middlewares/auth.middleware.js";
+
 const router = express.Router();
 
 router.route("/register").post(registerValidator(), validate, registerUser);
 router.route("/login").post(loginValidator(), validate, loginUser);
-router.post("/logout", (req, res) => {
-  return res.status(200).json({
-    message: "Logged out successfully",
-  });
-});
+router.post("/logout", logoutUser);
+router.post("/refresh-token", refreshAccessToken);
 
 // protected routes
 

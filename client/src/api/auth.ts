@@ -1,4 +1,5 @@
 const BASE_URL = import.meta.env.VITE_API_URL;
+import { fetchWithAuth } from "./fetchWithAuth";
 
 export const registerUser = async (data: {
   name: string;
@@ -25,6 +26,7 @@ export const registerUser = async (data: {
 export const loginUser = async (data: { email: string; password: string }) => {
   const res = await fetch(`${BASE_URL}/login`, {
     method: "POST",
+    credentials: "include",
     headers: {
       "content-type": "application/json",
     },
@@ -42,6 +44,7 @@ export const loginUser = async (data: { email: string; password: string }) => {
 export const logoutUser = async () => {
   const res = await fetch(`${BASE_URL}/logout`, {
     method: "POST",
+    credentials: "include",
   });
 
   const data = await res.json();
@@ -54,20 +57,29 @@ export const logoutUser = async () => {
 };
 
 export const getCurrentUser = async () => {
-  const token = localStorage.getItem("token");
-
-  const res = await fetch(`${BASE_URL}/profile`, {
+  const res = await fetchWithAuth("/profile", {
     method: "GET",
-    headers: {
-      "Content-Type": "application/json",
-      Authorization: `Bearer ${token}`,
-    },
   });
 
   const data = await res.json();
 
   if (!res.ok) {
-    throw new Error(data.message || "Failed to fetch the user");
+    throw new Error(data.message || "Failed to fetch user");
+  }
+
+  return data;
+};
+
+export const refreshAccessToken = async () => {
+  const res = await fetch(`${BASE_URL}/refresh-token`, {
+    method: "POST",
+    credentials: "include",
+  });
+
+  const data = await res.json();
+
+  if (!res.ok) {
+    throw new Error(data.message || "Failed to refresh token");
   }
 
   return data;

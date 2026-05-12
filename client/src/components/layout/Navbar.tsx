@@ -22,7 +22,8 @@ export default function Navbar() {
         const res = await getCurrentUser();
         setUser(res.user);
       } catch (error) {
-        localStorage.removeItem("token");
+        localStorage.removeItem("accessToken");
+        localStorage.removeItem("refreshToken");
         navigate("/login");
       }
     };
@@ -34,7 +35,8 @@ export default function Navbar() {
     try {
       await logoutUser();
 
-      localStorage.removeItem("token");
+      localStorage.removeItem("accessToken");
+      localStorage.removeItem("refreshToken");
 
       toast.success("Logged out successfully");
 

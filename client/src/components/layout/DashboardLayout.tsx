@@ -13,10 +13,10 @@ export default function DashboardLayout({
   const navigate = useNavigate();
 
   useEffect(() => {
-    const token = localStorage.getItem("token");
+    const token = localStorage.getItem("accessToken");
 
     if (token && isTokenExpired(token)) {
-      localStorage.removeItem("token");
+      localStorage.removeItem("accessToken");
       navigate("/login", { replace: true });
     }
   }, []);
